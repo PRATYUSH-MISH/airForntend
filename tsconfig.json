@@ -44,8 +44,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    /* Allow JavaScript files */
-    "allowJs": true,
+
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
