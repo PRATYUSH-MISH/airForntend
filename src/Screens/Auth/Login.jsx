@@ -11,7 +11,7 @@ function Login() {
   const submit = async (e) => {
     e.preventDefault();//form not reload 
     try {
-      const res = await fetch('https://airserverr.onrender.com/auth/login', {
+      const res = await fetch('https://server-vddr.onrender.com/auth/login', {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

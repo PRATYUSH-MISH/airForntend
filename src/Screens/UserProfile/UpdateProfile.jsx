@@ -18,7 +18,7 @@ const UpdateProfile = ({ userProfile, onUpdate }) => {
         }
 
         try {
-            const response = await axios.post('https://airserverr.onrender.com/profile/update', {
+            const response = await axios.post('https://server-vddr.onrender.com/profile/update', {
                 name,
                 age,
                 gender,

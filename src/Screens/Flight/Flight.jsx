@@ -23,7 +23,7 @@ const FlightSearch = () => {
             }
 
             try {
-                const response = await fetch('https://airserverr.onrender.com/flight/check', {
+                const response = await fetch('https://server-vddr.onrender.com/flight/check', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

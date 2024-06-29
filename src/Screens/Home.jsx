@@ -22,7 +22,7 @@ const Home = () => {
   const maxDate = '2030-12-31';
 
   useEffect(() => {
-    fetch('http://localhost:8000/')
+    fetch('https://server-vddr.onrender.com/')
       .then(response => response.json())
       .then(data => setData(data))
       .catch(error => console.error('Error fetching data:', error));
