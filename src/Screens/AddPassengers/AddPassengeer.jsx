@@ -25,7 +25,7 @@ const AddPassengers = () => {
     const passengerData = { name, age, gender, bookingId ,email};
 
     try {
-      const response = await fetch('https://server-vddr.onrender.com/passengers/add', {
+      const response = await fetch('https://server-1-z5y0.onrender.com/passengers/add', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

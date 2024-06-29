@@ -12,7 +12,7 @@ const DeleteBookedFlight = ({ bookingId, onDelete }) => {
         }
 
         try {
-            const response = await axios.delete(`https://server-vddr.onrender.com/profile/bookedflights/${bookingId}`, {
+            const response = await axios.delete(`https://server-1-z5y0.onrender.com/profile/bookedflights/${bookingId}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

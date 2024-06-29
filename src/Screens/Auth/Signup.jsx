@@ -16,7 +16,7 @@ function Signup() {
     e.preventDefault();
     console.log(user);
     try {
-      const response = await fetch(`https://server-vddr.onrender.com/auth/signup`, {
+      const response = await fetch(`https://server-1-z5y0.onrender.com/auth/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

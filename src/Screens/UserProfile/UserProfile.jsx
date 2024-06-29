@@ -24,7 +24,7 @@ const UserProfile = () => {
       }
 
       try {
-        const response = await axios.get('https://server-vddr.onrender.com/profile', {
+        const response = await axios.get('https://server-1-z5y0.onrender.com/profile', {
           headers: {
             'Authorization': `Bearer ${token}`
           }

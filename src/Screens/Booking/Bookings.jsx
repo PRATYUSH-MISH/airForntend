@@ -13,7 +13,7 @@ const Bookings = () => {
     useEffect(() => {
         const fetchBookings = async () => {
             try {
-                const response = await fetch('https://server-vddr.onrender.com/book/bookings');
+                const response = await fetch('https://server-1-z5y0.onrender.com/book/bookings');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }

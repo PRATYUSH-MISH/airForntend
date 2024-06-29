@@ -19,7 +19,7 @@ const Ticket = () => {
             }
 
             try {
-                const response = await axios.get(`https://airserverr.onrender.com/api/tickets/${bookingId}`, {
+                const response = await axios.get(`https://server-1-z5y0.onrender.com/api/tickets/${bookingId}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }

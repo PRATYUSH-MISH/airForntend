@@ -79,7 +79,7 @@ const PrintTicket = () => {
 
         try {
             // Send POST request to backend with departDate included
-            await axios.post('https://server-vddr.onrender.com/api/tickets', {
+            await axios.post('https://server-1-z5y0.onrender.com/api/tickets', {
                 bookingId,
                 passengers,
                 totalFare,
