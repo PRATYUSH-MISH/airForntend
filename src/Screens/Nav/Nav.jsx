@@ -1,14 +1,11 @@
-// // Navbar.jsx
+// Navbar.jsx
 import React, { useState } from 'react';
 import { NavLink } from "react-router-dom";
 import { IoClose, IoMenu } from "react-icons/io5";
 import "./Navbar.css";
+import Logo from "../img/icon.png";
 
-import Logo from "../img/icon.png"
-//const navigate=useNavigate();
 const Nav = () => {
-
-
     const [showMenu, setShowMenu] = useState(false);
 
     const toggleMenu = () => {
@@ -20,10 +17,12 @@ const Nav = () => {
             setShowMenu(false);
         }
     };
-    const handleLogout=()=>{
+
+    const handleLogout = () => {
         localStorage.removeItem('authToken');
-       // navigate('/login')
-    }
+        // navigate('/login')
+    };
+
     return (
         <header className="header">
             <nav className="nav container">
@@ -32,73 +31,48 @@ const Nav = () => {
                     Airline Booking
                 </NavLink>
 
-                <div
-                    className={`nav__menu ${showMenu ? "show-menu" : ""}`}
-                    id="nav-menu"
-                >
+                <div className={`nav__menu ${showMenu ? "show-menu" : ""}`} id="nav-menu">
                     <ul className="nav__list">
                         <li className="nav__item">
                             <NavLink to="/" className="nav__link" onClick={closeMenuOnMobile}>
                                 Home
                             </NavLink>
                         </li>
-                        
                         <li className="nav__item">
-                            <NavLink
-                                to="/aboutus"
-                                className="nav__link"
-                                onClick={closeMenuOnMobile}
-                            >
-                                About US
+                            <NavLink to="/aboutus" className="nav__link" onClick={closeMenuOnMobile}>
+                                About Us
                             </NavLink>
                         </li>
-                        {(localStorage.getItem("authToken"))?
+                        {localStorage.getItem("authToken") ? (
                             <li className="nav__item">
-                                <NavLink
-                                    to="/profile"
-                                    className="nav__link"
-                                    onClick={closeMenuOnMobile}
-                                >
+                                <NavLink to="/profile" className="nav__link" onClick={closeMenuOnMobile}>
                                     Profile
                                 </NavLink>
                             </li>
-                    
-                  : ""  }
-                      
-                         {/* if not login */}
-                        {(!localStorage.getItem("authToken"))?
-                            <div className='nav container'>
+                        ) : null}
 
+                        {!localStorage.getItem("authToken") ? (
+                            <div className='nav__auth-container'>
                                 <li className="nav__item">
-                                    <NavLink to="/login" className="nav__link nav__cta">
+                                    <NavLink to="/login" className="nav__link nav__cta nav__login">
                                         Login
                                     </NavLink>
                                 </li>
                                 <li className="nav__item">
-                                    <NavLink to="/signup" className="nav__link nav__cta">
+                                    <NavLink to="/signup" className="nav__link nav__cta nav__signup">
                                         Sign Up
                                     </NavLink>
                                 </li>
-
-
-                            </div>  
-                    
-                   :   
-
-                   <div className='nav container'>
+                            </div>
+                        ) : (
+                            <div className='nav__auth-container'>
                                 <li className="nav__item">
-                                    <NavLink to='/login'  className="nav__link nav__cta"
-                                    onClick={handleLogout}
-                                    >
-                                        LogOut
+                                    <NavLink to='/login' className="nav__link nav__cta" onClick={handleLogout}>
+                                        Logout
                                     </NavLink>
                                 </li>
-                   </div>
-                   
-                   }
-                       
-
-                           
+                            </div>
+                        )}
                     </ul>
                     <div className="nav__close" id="nav-close" onClick={toggleMenu}>
                         <IoClose />
@@ -110,14 +84,7 @@ const Nav = () => {
                 </div>
             </nav>
         </header>
-    )
+    );
+};
 
-
-
-}
 export default Nav;
-
-
-
-
-
