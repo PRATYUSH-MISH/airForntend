@@ -7,7 +7,13 @@
     border-radius: 10px;
     background-color: #ffffff;
 }
-
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* Full viewport height */
+}
 .bookings h1 {
     text-align: center;
     margin-bottom: 20px;

@@ -42,16 +42,10 @@ const Bookings = () => {
         setFlipped(!flipped);
     };
 
-    const handleNextBooking = () => {
-        setCurrentBookingIndex((prevIndex) => (prevIndex + 1) % bookings.length);
-    };
-
-    const handlePreviousBooking = () => {
-        setCurrentBookingIndex((prevIndex) => (prevIndex - 1 + bookings.length) % bookings.length);
-    };
+   
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div className="loading">Loading...</div>;
     }
 
     if (error) {

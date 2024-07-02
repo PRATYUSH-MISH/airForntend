@@ -1,5 +1,5 @@
 // Navbar.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from "react-router-dom";
 import { IoClose, IoMenu } from "react-icons/io5";
 import "./Navbar.css";
@@ -7,6 +7,9 @@ import Logo from "../img/icon.png";
 
 const Nav = () => {
     const [showMenu, setShowMenu] = useState(false);
+    const [lastScrollY, setLastScrollY] = useState(window.scrollY);
+    const [hidden, setHidden] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("authToken"));
 
     const toggleMenu = () => {
         setShowMenu(!showMenu);
@@ -20,11 +23,33 @@ const Nav = () => {
 
     const handleLogout = () => {
         localStorage.removeItem('authToken');
+        setIsLoggedIn(false);
         // navigate('/login')
     };
 
+    const handleScroll = () => {
+        const currentScrollY = window.scrollY;
+        if (currentScrollY > lastScrollY) {
+            setHidden(true);
+        } else {
+            setHidden(false);
+        }
+        setLastScrollY(currentScrollY);
+    };
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, [lastScrollY]);
+
+    useEffect(() => {
+        setIsLoggedIn(!!localStorage.getItem("authToken"));
+    }, []);
+
     return (
-        <header className="header">
+        <header className={`header ${hidden ? 'hidden' : ''}`}>
             <nav className="nav container">
                 <NavLink to="/" className="nav__logo">
                     <img className="nav__logo" src={Logo} alt="Logo" />
@@ -43,7 +68,7 @@ const Nav = () => {
                                 About Us
                             </NavLink>
                         </li>
-                        {localStorage.getItem("authToken") ? (
+                        {isLoggedIn ? (
                             <li className="nav__item">
                                 <NavLink to="/profile" className="nav__link" onClick={closeMenuOnMobile}>
                                     Profile
@@ -51,7 +76,7 @@ const Nav = () => {
                             </li>
                         ) : null}
 
-                        {!localStorage.getItem("authToken") ? (
+                        {!isLoggedIn ? (
                             <div className='nav__auth-container'>
                                 <li className="nav__item">
                                     <NavLink to="/login" className="nav__link nav__cta nav__login">

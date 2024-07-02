@@ -73,21 +73,20 @@ const UserProfile = () => {
     }
   };
 
-  const handleDownloadTicket=(bookingId)=>{
+  const handleDownloadTicket = (bookingId) => {
     navigate(`/tickets/${bookingId}`)
   }
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="loading">Loading...</div>;
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <div className="error">Error: {error}</div>;
   }
 
   return (
     <div className='user-profile'>
-    
       <h2>User Profile</h2>
       {userProfile && (
         <div>
@@ -110,15 +109,12 @@ const UserProfile = () => {
               ))}
             </ul>
           ) : (
-              <p className="no-flights">No booked flights found.</p>
+            <p className="no-flights">No booked flights found.</p>
           )}
         </div>
       )}
     </div>
-  
   );
 };
 
 export default UserProfile;
-
-
