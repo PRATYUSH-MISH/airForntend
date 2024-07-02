@@ -58,7 +58,7 @@ const UserProfile = () => {
     }
 
     try {
-      await axios.delete(`http://localhost:8000/profile/bookedflights/${bookingId}`, {
+      await axios.delete(`https://server-1-z5y0.onrender.com/profile/bookedflights/${bookingId}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

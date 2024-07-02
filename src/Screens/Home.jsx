@@ -22,7 +22,7 @@ const Home = () => {
   const maxDate = '2030-12-31';
 
   useEffect(() => {
-    fetch('https://server-1-z5y0.onrender.com')
+    fetch('https://server-1-z5y0.onrender.com/')
       .then(response => response.json())
       .then(data => setData(data))
       .catch(error => console.error('Error fetching data:', error));
@@ -45,7 +45,7 @@ const Home = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:8000/book', {
+      const response = await fetch('https://server-1-z5y0.onrender.com/book', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

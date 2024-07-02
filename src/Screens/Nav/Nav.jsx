@@ -49,7 +49,7 @@ const Nav = () => {
                                 className="nav__link"
                                 onClick={closeMenuOnMobile}
                             >
-                                About Us
+                                About US
                             </NavLink>
                         </li>
                         {(localStorage.getItem("authToken"))?
