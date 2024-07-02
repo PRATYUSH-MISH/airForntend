@@ -1,39 +1,31 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import axios from "axios";
 
 function Signup() {
-  const [user, setUser] = useState({ name: "", email: "", password: "" })
-  const navigate = useNavigate(); // Using useNavigate hook
+  const [user, setUser] = useState({ name: "", email: "", password: "" });
+  const navigate = useNavigate();
 
   const handleInputs = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value })
-  }
-
-
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
 
   const submit = async (e) => {
     e.preventDefault();
     console.log(user);
     try {
-      const response = await fetch(`https://server-1-z5y0.onrender.com/auth/signup`, {
-        method: "POST",
+      const response = await axios.post('https://server-1-z5y0.onrender.com/auth/signup', user, {
         headers: {
           "Content-Type": "application/json"
-        },
-        body: JSON.stringify(user)
+        }
       });
-
-      if (!response.ok) {
-        throw new Error("Failed to sign up");
-      }
 
       // Navigate to the home page after successful signup
       navigate('/', { state: { id: user.name } });
     } catch (error) {
       console.error("Error:", error.message);
     }
-  }
+  };
 
   return (
     <div className="Auth-form-container">
@@ -49,7 +41,7 @@ function Signup() {
           <div className="form-group mt-3">
             <label>Full Name</label>
             <input
-              type="text" name="name" // Add
+              type="text" name="name"
               className="form-control mt-1"
               placeholder="e.g Jane Doe"
               autoComplete="name"
@@ -63,7 +55,6 @@ function Signup() {
               className="form-control mt-1"
               placeholder="Email Address"
               autoComplete="email"
-
               value={user.email}
               onChange={handleInputs} />
           </div>
@@ -74,9 +65,7 @@ function Signup() {
               className="form-control mt-1"
               placeholder="Password"
               autoComplete="new-password"
-
               value={user.password}
-
               onChange={handleInputs} />
           </div>
           <div className="d-grid gap-2 mt-3">
@@ -93,4 +82,4 @@ function Signup() {
   );
 }
 
-export default Signup; 
+export default Signup;

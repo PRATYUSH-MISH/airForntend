@@ -1,9 +1,8 @@
-
-
 import React, { useEffect, useState, useMemo } from 'react';
 import IMG2 from './img/plane3.1.jpg';
 import './Home.css';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Home = () => {
   const [tripType, setTripType] = useState('1');
@@ -22,9 +21,8 @@ const Home = () => {
   const maxDate = '2030-12-31';
 
   useEffect(() => {
-    fetch('https://server-1-z5y0.onrender.com/')
-      .then(response => response.json())
-      .then(data => setData(data))
+    axios.get('https://server-1-z5y0.onrender.com/')
+      .then(response => setData(response.data))
       .catch(error => console.error('Error fetching data:', error));
   }, []);
 
@@ -45,26 +43,23 @@ const Home = () => {
     }
 
     try {
-      const response = await fetch('https://server-1-z5y0.onrender.com/book', {
-        method: 'POST',
+      const response = await axios.post('https://server-1-z5y0.onrender.com/book', {
+        tripType,
+        origin,
+        destination,
+        departDate,
+        returnDate,
+        seat,
+      }, {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          tripType,
-          origin,
-          destination,
-          departDate,
-          returnDate,
-          seat,
-        }),
       });
 
-      if (response.ok) {
+      if (response.status === 200) {
         navigate('/bookings');
       } else {
-        const errorData = await response.json();
-        console.error('Error response:', errorData);
+        console.error('Error response:', response.data);
         alert('Error submitting booking. Please try again.');
       }
     } catch (error) {
@@ -94,6 +89,12 @@ const Home = () => {
     setDestination(city);
     setShowDestinationSuggestions(false);
   };
+
+  useEffect(() => {
+    if (tripType === '2') {
+      document.getElementById('return_date').focus();
+    }
+  }, [tripType]);
 
   return (
     <>

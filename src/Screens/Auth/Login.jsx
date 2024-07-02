@@ -1,37 +1,28 @@
-import React, { useState } from "react"
-import { useNavigate, Link } from "react-router-dom"
-
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import axios from 'axios';
 
 function Login() {
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate(); // Import and use useNavigate hook
+  const navigate = useNavigate();
 
   const submit = async (e) => {
-    e.preventDefault();//form not reload 
+    e.preventDefault();
     try {
-      const res = await fetch('https://server-1-z5y0.onrender.com/auth/login', {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          email,
-          password
-        })
+      const res = await axios.post('https://server-1-z5y0.onrender.com/auth/login', {
+        email,
+        password
       });
 
-      const data = await res.json();
+      const data = res.data;
 
       if (res.status === 400 || !data) {
         window.alert("INVALID CREDENTIALS");
       } else {
         window.alert("LOGIN SUCCESSFUL!");
-      
-      localStorage.setItem("authToken",data.token) 
-      console.log(localStorage.getItem("authToken"));
-     // handleLogin(data.name);
+        localStorage.setItem("authToken", data.token);
+        console.log(localStorage.getItem("authToken"));
         navigate('/');
       }
     } catch (error) {
@@ -78,5 +69,3 @@ function Login() {
 }
 
 export default Login;
-
-

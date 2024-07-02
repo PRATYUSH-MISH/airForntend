@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Navbar from '../Nav/Nav';
 import './AddPassengers.css';
+import axios from 'axios';
 
 const AddPassengers = () => {
   const location = useLocation();
@@ -22,24 +22,12 @@ const AddPassengers = () => {
       setError('All fields are required.');
       return;
     }
-    const passengerData = { name, age, gender, bookingId ,email};
+    const passengerData = { name, age, gender, bookingId, email };
 
     try {
-      const response = await fetch('https://server-1-z5y0.onrender.com/passengers/add', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(passengerData),
-      });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const data = await response.json();
+      const response = await axios.post('https://server-1-z5y0.onrender.com/passengers/add', passengerData);
       setPassengers([...passengers, passengerData]);
-      setMessage(data.message);
+      setMessage(response.data.message);
       setError('');
       setName('');
       setAge('');
@@ -50,6 +38,10 @@ const AddPassengers = () => {
       setMessage('');
     }
   };
+
+
+
+
 
   const handlePayment = () => {
     navigate('/payment', {
@@ -66,7 +58,7 @@ const AddPassengers = () => {
           fare: flight[`${bookingData.seat}_fare`]
         },
         origin: bookingData.originAirport,         // Include origin here
-        destination: bookingData.destinationAirport 
+        destination: bookingData.destinationAirport
       }
     });
   };
@@ -75,7 +67,7 @@ const AddPassengers = () => {
 
   return (
     <>
-     
+
       <div className="add-passenger">
         <h2>Add Passenger</h2>
         {message && <p className="success">{message}</p>}

@@ -1,10 +1,7 @@
-
-
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-
+import { useNavigate, useLocation } from 'react-router-dom';
+import axios from 'axios';
 import './FlightSearch.css';
-import { useLocation } from 'react-router-dom';
 
 const FlightSearch = () => {
     const location = useLocation();
@@ -23,30 +20,19 @@ const FlightSearch = () => {
             }
 
             try {
-                const response = await fetch('https://server-1-z5y0.onrender.com/flight/check', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        originAirport: bookingData.originAirport,
-                        destinationAirport: bookingData.destinationAirport,
-                        departDate: bookingData.departDate,
-                        seat: bookingData.seat,
-                    }),
+                const response = await axios.post('https://server-1-z5y0.onrender.com/flight/check', {
+                    originAirport: bookingData.originAirport,
+                    destinationAirport: bookingData.destinationAirport,
+                    departDate: bookingData.departDate,
+                    seat: bookingData.seat,
                 });
 
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-
-                const data = await response.json();
-                console.log('Fetched available flights data:', data);
-                if (Array.isArray(data)) {
-                    setFlights(data);
-                } else {
+                if (!response.data || !Array.isArray(response.data)) {
                     throw new Error('Flights data is not an array');
                 }
+
+                console.log('Fetched available flights data:', response.data);
+                setFlights(response.data);
             } catch (error) {
                 setError(error.message);
             } finally {
@@ -67,7 +53,7 @@ const FlightSearch = () => {
         const bookingId = generateBookingId();
         navigate('/addpassenger', { state: { flight, bookingId, bookingData } });
     };
-    
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -78,7 +64,6 @@ const FlightSearch = () => {
 
     return (
         <>
-            
             <div className="flight-search">
                 <div className="flight-info">
                     <h2>Flight Search Results</h2>
@@ -102,7 +87,6 @@ const FlightSearch = () => {
                                     <th>Arrival Time</th>
                                     <th>Duration</th>
                                     <th>Fare</th>
-                                        
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -115,8 +99,6 @@ const FlightSearch = () => {
                                         <td>{flight.arrival_time}</td>
                                         <td>{flight.duration}</td>
                                         <td>{flight[`${bookingData.seat}_fare`]}</td>
-
-                                        
                                         <td>
                                             <button onClick={() => handleSelectFlight(flight)}>
                                                 Select

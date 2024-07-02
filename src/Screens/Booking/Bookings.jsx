@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './Bookings.css';
 
 const Bookings = () => {
@@ -13,13 +14,9 @@ const Bookings = () => {
     useEffect(() => {
         const fetchBookings = async () => {
             try {
-                const response = await fetch('https://server-1-z5y0.onrender.com/book/bookings');
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data = await response.json();
-                console.log('Fetched bookings data:', data);
-                setBookings(data);
+                const response = await axios.get('https://server-1-z5y0.onrender.com/book/bookings');
+                setBookings(response.data);
+                console.log('Fetched bookings data:', response.data);
             } catch (error) {
                 setError(error.message);
             } finally {
@@ -76,7 +73,7 @@ const Bookings = () => {
                         Flip Origin and Destination
                     </button>
                 )}
-                
+
                 <div className="booking-details">
                     <table className="bookings-table">
                         <thead>
