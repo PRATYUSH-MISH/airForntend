@@ -1,4 +1,3 @@
-// Navbar.jsx
 import React, { useState, useEffect } from 'react';
 import { NavLink } from "react-router-dom";
 import { IoClose, IoMenu } from "react-icons/io5";
@@ -9,7 +8,7 @@ const Nav = () => {
     const [showMenu, setShowMenu] = useState(false);
     const [lastScrollY, setLastScrollY] = useState(window.scrollY);
     const [hidden, setHidden] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("authToken"));
+    const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("authToken")); // Check if authToken exists
 
     const toggleMenu = () => {
         setShowMenu(!showMenu);
@@ -24,7 +23,6 @@ const Nav = () => {
     const handleLogout = () => {
         localStorage.removeItem('authToken');
         setIsLoggedIn(false);
-        // navigate('/login')
     };
 
     const handleScroll = () => {
@@ -45,7 +43,7 @@ const Nav = () => {
     }, [lastScrollY]);
 
     useEffect(() => {
-        setIsLoggedIn(!!localStorage.getItem("authToken"));
+        setIsLoggedIn(!!localStorage.getItem("authToken")); // Update isLoggedIn state
     }, []);
 
     return (

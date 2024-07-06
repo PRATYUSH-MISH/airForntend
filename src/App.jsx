@@ -1,5 +1,5 @@
 // // src/App.tsx
-import React ,{useState}from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Home from "./Screens/Home";
@@ -15,6 +15,7 @@ import Ticket from './Screens/UserProfile/Ticket'
 //import ProtectedRoute from './Screens/ProtectedRoute';
 import PrintTicket from './Screens/PrintTicket/PrintTicket';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Aboutus from './Screens/Aboutus';
 //import Logout from './Screens/Logout'
 
 
@@ -38,13 +39,14 @@ function App() {
             <Route path="/" element={<Home isLoggedIn={isLoggedIn} />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/login" element={<Login handleLogin={handleLogin} />} />
-            
+
             <Route path="/signup" element={<Signup />} />
+            <Route path="/aboutus" element={<Aboutus />} />
             <Route path="/bookings" element={<Bookings />} />
-            <Route path='/flight' element={<FlightSearch/>}/>
-            <Route path='/addpassenger'element={<AddPassengers/>}/>
-            <Route path='/payment' element={<Payment/>}/>
-            
+            <Route path='/flight' element={<FlightSearch />} />
+            <Route path='/addpassenger' element={<AddPassengers />} />
+            <Route path='/payment' element={<Payment />} />
+
             <Route path='/printticket' element={<PrintTicket />} />
             <Route path='/tickets/:bookingId' element={<Ticket />} />
 
@@ -57,4 +59,3 @@ function App() {
 }
 
 export default App;
-

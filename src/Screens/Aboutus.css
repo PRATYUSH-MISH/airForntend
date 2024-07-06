@@ -1,0 +1,9 @@
+/* Aboutus.css */
+#root>div:nth-child(1)>main:nth-child(2)>section:nth-child(1)>div:nth-child(1) {
+    width: 1340px;
+    max-width: 1340px;
+    margin-top: 182px;
+    margin-left: -16px;
+    color: rgb(0, 0, 0);
+    font-weight: 800;
+}
